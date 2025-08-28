@@ -21,7 +21,6 @@ Accessibility is a priority in my projects and I think it should be in yours too
 - [Windmill React UI](https://windmillui.com/react-ui)
 - React Router
 - Heroicons
-- Chart.js
 - PWA delivering offline-first and app-like experience
 
 ## 📚 Docs
