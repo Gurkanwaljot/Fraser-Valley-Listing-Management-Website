@@ -75,7 +75,6 @@ export default function AgentForm({ onSuccess }) {
           brokerage: form.brokerage,
           fileId: form.fileId
         }
-        console.log("agent: ", agentPayload)
       const res = await fetch(
         editMode ? `${API_BASE}/api/agents/${id}` : `${API_BASE}/api/agents`,
         {
@@ -94,7 +93,6 @@ export default function AgentForm({ onSuccess }) {
         history.push('/app/agents')
       }
       const data = await res.json();
-      console.log("data: ", data)
       const agentId =  data._id;
       if(selectedAgentImages.length > 0 || selectedAgentLogo.length > 0 || selectedBrokerageLogo.length > 0){
         const formData = new FormData();
@@ -125,13 +123,7 @@ export default function AgentForm({ onSuccess }) {
               const err = await res.json().catch(() => ({}));
               throw new Error(err.message || 'Upload failed');
             }
-
             const imgDoc = await res.json();
-            // data.images is an array [{url, altText, ...}]
-            console.log('Uploaded:', data.images);
-
-            // Clear local state if you want
-            // setSelectedAgentImages([]); setSelectedAgentLogo([]); setSelectedBrokerageLogo([]);
             // If Listing.fileId is a SINGLE ref (recommended):
             await fetch(`${API_BASE}/api/agents/${agentId}`, {
             method: 'PUT',

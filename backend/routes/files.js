@@ -447,7 +447,6 @@ router.post('/agent/:id/replace', upload.single('image'), async (req, res) => {
       ],
       { new: true, upsert: true }
     );
-    console.log("updated records: ", updated);
     // OPTIONAL: If you want to unlink the previous file, fetch the prior URL *before* the update
     // (You can move a findOne() before and diff, or return the "previous" from the pipeline with $let)
     return res.status(200).json(updated);

@@ -6,8 +6,6 @@ const AllListings = lazy(() => import('../pages/Listings/All'))
 const createListing = lazy(() => import('../pages/Listings/CreateListing'));
 const createAgent = lazy(() => import('../pages/Agents/Create'));
 const EditListing   = lazy(() => import('../pages/Listings/EditListing'))
-// const Preview = lazy(() => import('../pages/Listings/Preview'));
-// console.log(Preview)
 
 const routes = [
   {

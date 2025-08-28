@@ -58,7 +58,6 @@ export default function AgentSelectionModal({open, listingId, onClose, triggerRe
                     const agentsRes =  await fetch(`${API_BASE}/api/agents?ids=${ids}`);
                     if(agentsRes.ok){
                     const agentsData = await agentsRes.json();
-                    console.log("Agents data: ", agentsData)
                     setAgents(agentsData)
                     }
                 }
@@ -77,14 +76,11 @@ export default function AgentSelectionModal({open, listingId, onClose, triggerRe
   }
   
   const onConfirm = async (e) => {
-    console.log(selectedAgent)
     if(selectedAgent){
         const payload = selectedAgent?._id 
             ? {listingId: listingId, agentId: selectedAgent._id}
             : {listingId: listingId, email: selectedAgent.email}
         try {
-        const ADMIN_KEY = process.env.REACT_APP_ADMIN_API_KEY || 'dev-abc-123';
-        console.log(ADMIN_KEY)
         const res = await fetch(`${API_BASE}/api/preview/send`, {
         method: 'POST',
         headers: { 

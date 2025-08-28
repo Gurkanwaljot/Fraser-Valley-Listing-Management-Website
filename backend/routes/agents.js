@@ -24,7 +24,6 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try{
     const listing = await Agent.findById(req.params.id);
-    console.log(listing)
     if(!listing){
       return res.status(404).json({ message: "Listing Not Found"});
     }
@@ -51,8 +50,6 @@ router.post("/", async (req, res) => {
 router.put("/:id", async (req, res) => {
   try {
     const updates = req.body;
-    console.log("updates: ", updates);
-    console.log("Agent ID: ", req.params.id);
     const options = { new: true, runValidators: true };
     const updated = await Agent.findByIdAndUpdate(req.params.id, updates, options);
     if (!updated) {

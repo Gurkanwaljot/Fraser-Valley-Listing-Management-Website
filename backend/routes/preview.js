@@ -99,7 +99,6 @@ router.post('/send', async (req, res) => {
      // Ensure slug
     const slug = await ensureSlug(listing);
     const token = createPreviewToken({ listingId, agentId });
-    console.log(token);
     const base  = (process.env.REACT_APP_CLIENT_BASE || '').replace(/\/+$/,'');
     const publicUrl = `${base}/${slug}?t=${encodeURIComponent(token)}`;
     const info = await sendPreviewEmail({
@@ -108,11 +107,6 @@ router.post('/send', async (req, res) => {
       listingTitle: listing.title,
       publicUrl,
     });
-    console.log('[email] messageId:', info.messageId);
-    console.log('[email] accepted:', info.accepted);
-    console.log('[email] rejected:', info.rejected);
-    console.log('[email] response:', info.response);
-
      // Consider "accepted" as success signal; still publish on 2xx
     const accepted = Array.isArray(info.accepted) ? info.accepted.length : 0;
 

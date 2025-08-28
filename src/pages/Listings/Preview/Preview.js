@@ -97,7 +97,6 @@ function Preview(props) {
       setError(null);
       try {
         let res;
-        console.log("Is Admin: ",isAdmin);
         if (allowAdmin && isAdmin) {
           // Admin can load by :id (when coming from Detail) or by :slug direct
           const url = id
@@ -128,9 +127,7 @@ function Preview(props) {
         }
 
         const listingData = await res.json();
-        console.log(listingData)
         setListing(listingData);
-
         // Agents
         if (Array.isArray(listingData.agentIds) && listingData.agentIds.length) {
           const agentIds = listingData.agentIds.join(",");

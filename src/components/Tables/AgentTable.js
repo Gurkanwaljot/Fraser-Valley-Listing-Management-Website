@@ -205,7 +205,6 @@ function AgentTable({ data }) {
         throw new Error(err.message || 'Failed to update agent.')
       }
       if(deleteAgentImage  !== undefined){
-        console.log(deleteAgentImage)
         await fetch(`http://localhost:5002/api/files/agent/${id}/by-alt/${deleteAgentImage.altText}`, { method: 'DELETE' });
         setDeleteAgentImages([])
       }
@@ -220,7 +219,6 @@ function AgentTable({ data }) {
       if(updatedAgentImage.length > 0 && agentImages.legnth === undefined){
         try{
           const formData = new FormData();
-          console.log(updatedAgentImage)
           formData.append('agent', id)
           updatedAgentImage.forEach((file) => {
             formData.append('image', file);
@@ -233,8 +231,6 @@ function AgentTable({ data }) {
             });
 
           if (!res.ok) throw new Error((await res.json()).message || 'Replace failed');
-          const updatedDoc = await res.json(); // { images: [...] }
-          console.log(updatedDoc);
         } catch (e){
           console.error(e);
           alert(e.message);    
@@ -256,32 +252,25 @@ function AgentTable({ data }) {
             });
 
           if (!res.ok) throw new Error((await res.json()).message || 'Replace failed');
-          const updatedDoc = await res.json(); // { images: [...] }
-          console.log(updatedDoc);
         } catch (e){
           console.error(e);
           alert(e.message);    
         }
       }
-      console.log("updated: ",updatedBrokeragelogo);
       if(updatedBrokeragelogo.length > 0 && brokerageLogos.legnth === undefined){
         try{
           const formData = new FormData();
-          console.log(updatedBrokeragelogo)
           formData.append('agent', id)
           updatedBrokeragelogo.forEach((file) => {
             formData.append('image', file);
             formData.append('altText', 'brokerage-logo');
           })
-          console.log(formData)
           const res = await fetch(`http://localhost:5002/api/files/agent/${id}/replace`, {
               method: 'POST',
               body: formData, // DO NOT set Content-Type; the browser handles boundary
             });
 
           if (!res.ok) throw new Error((await res.json()).message || 'Replace failed');
-          const updatedDoc = await res.json(); // { images: [...] }
-          console.log(updatedDoc);
         } catch (e){
           console.error(e);
           alert(e.message);    

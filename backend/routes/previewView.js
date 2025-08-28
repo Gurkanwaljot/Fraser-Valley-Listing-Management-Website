@@ -24,9 +24,7 @@ function verifyPreviewToken(token) {
  */
 router.get('/slug/:slug', async (req, res) => {
   const listing = await Listing.findOne({ slug: req.params.slug, status: 'Published' }).lean();
-  console.log("listing: ", listing)
   if (!listing) return res.status(404).json({ message: 'Not found' });
-  console.log("listing: ", listing)
   res.json(listing);
 });
 

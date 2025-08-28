@@ -71,9 +71,7 @@ export default function ActionsMenu({ listingId, viewHref, onDelete }) {
   };
 
   const sendToAgentModal = () => {
-    console.log("hello")
     setShowAgentModal(true);
-    console.log(showAgentModal)
   }
 
   return (

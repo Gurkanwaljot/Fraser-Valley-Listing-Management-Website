@@ -25,7 +25,6 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try{
     const listing = await Listing.findById(req.params.id);
-    console.log(listing)
     if(!listing){
       return res.status(404).json({ message: "Listing Not Found"});
     }

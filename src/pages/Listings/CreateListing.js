@@ -86,7 +86,6 @@ export default function CreateListing() {
     const file = item;
     const name = item?.name || 'file';
     const ext =  getExt(name);
-    console.log(file)
     if (isImage(file)) {
     // image preview tile
       return (
@@ -189,7 +188,6 @@ export default function CreateListing() {
   // Listing Photos and Videos Selection
   const handleListingPhotosAndVideosChanges = (e) => {
     const files = Array.from(e.target.files || []);
-    console.log("files: ", files)
     setListingPhotosAndVideos((prev) => [...prev, ...files]);
   }
   // Listing Floor Plans Selection
@@ -231,7 +229,6 @@ export default function CreateListing() {
   const onCubicasaTitleChange = (e) => {
     setCubicasaTitle(e.target.value)
   }
-  console.log("listingPhotosAndVideos: ",listingPhotosAndVideos)
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError(null)
@@ -260,7 +257,6 @@ export default function CreateListing() {
         const iframe = div.querySelector('iframe');
         iframe.setAttribute('title', safeTitle);
         cubicasaBlock = {html : iframe.outerHTML};
-        console.log("cubicasa block: ", cubicasaBlock);
       }
       // 1) Create the listing WITHOUT images first
       const listingPayload = {
@@ -316,15 +312,12 @@ export default function CreateListing() {
           body: fd,
         })
         const listingFilesDoc = await listingImgsRes.json();
-        console.log(listingFilesDoc);
         // If Listing.fileId is a SINGLE ref (recommended)z:
-        const doc = await fetch(`${API_BASE}/api/listings/${listingId}`, {
+        await fetch(`${API_BASE}/api/listings/${listingId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ fileId: listingFilesDoc._id }),
         })
-        const data = await doc.json();
-        console.log(data);
       }
 
       // Success → go back to listings grid

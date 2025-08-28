@@ -8,7 +8,6 @@ const API_BASE = process.env.REACT_APP_API_BASE;
 
 export default function EditListing(){
     const { id } = useParams();
-    console.log(id)
     const history = useHistory();
     const [form, setForm] = useState({
         title: '',
@@ -85,11 +84,9 @@ export default function EditListing(){
                 filesData.find(item => item.listing === id) || // ← common shape
                 null;
                 setFileId(recordForThisListing._id)
-                console.log(recordForThisListing)
                 const filesForListing = Array.isArray(recordForThisListing?.listingFiles)
                 ? recordForThisListing.listingFiles
                 : [];
-                console.log(filesForListing)
                 if(filesForListing[0].listingimagesAndVideos.length > 0){
                   setSelectedPhotosAndVideos(filesForListing[0].listingimagesAndVideos)
                 }
@@ -399,7 +396,6 @@ export default function EditListing(){
             },
             cubicasaInfo : cubicasaBlock  
         }
-        console.log(payload)
           try {
             const res = await fetch(`${API_BASE}/api/listings/${id}`, {
                 method: 'PUT',
@@ -417,7 +413,6 @@ export default function EditListing(){
               floorplans:  selectedFloorPlans || [],
               listingDocuments: selectedDocuments || []
               };
-              console.log("All Files: ", allFiles)
               if(allFiles){
                 try{
                     const resFile = await fetch(`${API_BASE}/api/files/${id}`, {
