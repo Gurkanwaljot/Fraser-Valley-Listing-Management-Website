@@ -1,0 +1,31 @@
+# 1) Build stage: install deps, compile tailwind, build CRA
+FROM node:16-alpine AS builder
+WORKDIR /app
+
+# 1a) Install dependencies
+COPY package.json package-lock.json ./
+RUN npm ci --legacy-peer-deps
+
+# 1b) Copy code & build Tailwind CSS
+COPY . .
+RUN npm run tailwind:build
+
+# 1c) Tame the JS heap and disable CI lint-as-error
+ENV NODE_OPTIONS="--max_old_space_size=2048"
+ENV CI=false                
+ENV GENERATE_SOURCEMAP=false 
+ENV JEST_WORKER_MAX_WORKERS=2
+
+# 1d) Do the CRA production build
+RUN npm run build
+
+# 2) Runtime stage: serve the build (including PWA files)
+FROM node:16-alpine AS runner
+WORKDIR /app
+
+RUN npm install -g serve
+
+COPY --from=builder /app/build ./build
+
+EXPOSE 5000
+CMD ["serve", "-s", "build", "-l", "5000"]

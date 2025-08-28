@@ -1,0 +1,30 @@
+# Stage 1: Build React UI
+FROM node:16-alpine AS builder
+WORKDIR /app
+
+# Ensure base upload dirs exist (works with bind-mounted volumes)
+RUN mkdir -p /app/uploads/listing
+RUN mkdir -p /app/uploads/agent
+
+# Copy root package files and install all deps
+COPY package.json package-lock.json ./
+RUN npm ci --legacy-peer-deps
+
+
+
+# Workaround for FontAwesome CSS parse errors in CRA
+ENV SKIP_PREFLIGHT_CHECK=true
+
+# Update browserslist DB for PostCSS if needed
+RUN npx browserslist@latest --update-db || true
+
+# 3) Build frontend assets into backend/public if you need it
+# COPY --from=frontend_builder /app/build ./public
+
+# Copy full code (React) and install FontAwesome CSS dependencies
+COPY backend/ ./
+# 4) Expose your API port
+EXPOSE 5002
+
+# Start Express server using root package.json context
+CMD ["node", "server.mjs"]

@@ -1,0 +1,104 @@
+{
+  "name": "windmill-dashboard-react",
+  "version": "0.4.0",
+  "description": "A multi theme, completely accessible, with components and pages examples, (almost) ready for production dashboard.",
+  "private": true,
+  "proxy": "http://localhost:5000",
+  "scripts": {
+    "tailwind:dev": "tailwindcss build src/assets/css/tailwind.css -o src/assets/css/tailwind.output.css --watch",
+    "tailwind:build": "cross-env NODE_ENV=production tailwindcss build src/assets/css/tailwind.css -o src/assets/css/tailwind.output.css",
+    "prestart": "npm run tailwind:build",
+    "start": "cross-env PORT=5000 NODE_OPTIONS=--openssl-legacy-provider react-scripts start",
+    "prebuild": "npm run tailwind:build",
+    "build": "SKIP_PREFLIGHT_CHECK=true react-scripts build",
+    "cz": "git-cz",
+    "release": "release-it",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "backend": "node --max-http-header-size=16384 backend/server.js",
+    "dev": "concurrently -k -n css,api,web -c auto \"npm:tailwind:dev\" \"npm:backend\" \"npm:start\""
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^7.0.0",
+    "@react-google-maps/api": "^2.20.7",
+    "@testing-library/jest-dom": "4.2.4",
+    "@testing-library/react": "9.5.0",
+    "@testing-library/user-event": "7.2.1",
+    "@windmill/react-ui": "0.3.1",
+    "axios": "^1.11.0",
+    "chart.js": "2.9.3",
+    "classnames": "2.2.6",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "faker": "4.1.0",
+    "mongodb": "^6.18.0",
+    "mongoose": "^8.17.0",
+    "multer": "^2.0.2",
+    "react": "18.3.1",
+    "react-chartjs-2": "2.9.0",
+    "react-dom": "18.3.1",
+    "react-focus-lock": "^2.13.6",
+    "react-image-lightbox": "^5.1.4",
+    "react-multi-select-component": "^4.3.4",
+    "react-router-dom": "5.2.0",
+    "react-scripts": "3.4.1",
+    "react-select": "^5.10.2",
+    "react-transition-group": "^4.4.5",
+    "yet-another-react-lightbox": "^3.25.0"
+  },
+  "devDependencies": {
+    "@release-it/conventional-changelog": "1.1.4",
+    "@svgr/webpack": "5.4.0",
+    "autoprefixer": "9.8.0",
+    "commitizen": "4.1.2",
+    "concurrently": "^9.2.0",
+    "cross-env": "7.0.2",
+    "cssnano": "4.1.10",
+    "cz-conventional-changelog": "3.2.0",
+    "postcss-cli": "7.1.1",
+    "react-axe": "3.5.2",
+    "release-it": "13.6.4",
+    "tailwindcss": "^1.4.6"
+  },
+  "keywords": [
+    "windmill",
+    "dashboard",
+    "admin",
+    "tailwind",
+    "react"
+  ],
+  "release-it": {
+    "github": {
+      "release": true
+    },
+    "npm": {
+      "publish": false
+    },
+    "plugins": {
+      "@release-it/conventional-changelog": {
+        "preset": "angular",
+        "infile": "CHANGELOG.md"
+      }
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

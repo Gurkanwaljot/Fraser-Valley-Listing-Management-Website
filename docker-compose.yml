@@ -1,0 +1,32 @@
+services:
+  mongo:
+    image: mongo:6.0
+    container_name: 'mongo'
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo-data:/data/db
+  backend:
+    container_name: 'fvrep-backend'
+    build:
+      context: .        # point at the folder that actually contains your Dockerfile
+      dockerfile: backend/DockerfileBackend  # if your file is named “Dockerfile” in backend/
+    ports:
+      - '5002:5002'
+    environment:
+      MONGO_URI: mongodb://mongo:27017/listingsDB
+      PORT: 5002
+    depends_on:
+      - mongo
+  app:
+    container_name: 'fvrep-app'
+    build:
+      context: .                # point at your project root
+      dockerfile: DockerfileApp # or whatever your frontend file is actually named
+    ports:
+      - '5000:5000'
+    depends_on:
+      - backend
+
+volumes:
+  mongo-data: {}

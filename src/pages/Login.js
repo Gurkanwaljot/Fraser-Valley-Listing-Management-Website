@@ -1,0 +1,146 @@
+// src/pages/Login.jsx
+import React, { useState } from 'react';
+import { Link, useHistory, useLocation } from 'react-router-dom';
+
+import ImageLight from '../assets/img/login-office.jpeg';
+import ImageDark from '../assets/img/login-office-dark.jpeg';
+import { GithubIcon, TwitterIcon } from '../icons';
+import { Label, Input, Button } from '@windmill/react-ui';
+
+const API_BASE = process.env.REACT_APP_API_BASE;
+
+function Login() {
+  const history = useHistory();
+  const location = useLocation();
+  const redirectTo = (location.state && location.state.from) || { pathname: '/app' };
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setError('');
+    setSubmitting(true);
+    try {
+      const res = await fetch(`${API_BASE}/api/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include', // <-- IMPORTANT: sets the httpOnly cookie
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!res.ok) {
+        let msg = 'Login failed';
+        try {
+          const data = await res.json();
+          if (data?.message) msg = data.message;
+        } catch {}
+        throw new Error(msg);
+      }
+
+      // success → send to intended page or /app
+      history.replace(redirectTo);
+    } catch (err) {
+      setError(err.message || 'Something went wrong');
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  return (
+    <div className="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
+      <div className="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
+        <div className="flex flex-col overflow-y-auto md:flex-row">
+          <div className="h-32 md:h-auto md:w-1/2">
+            <img
+              aria-hidden="true"
+              className="object-cover w-full h-full dark:hidden"
+              src={ImageLight}
+              alt="Office"
+            />
+            <img
+              aria-hidden="true"
+              className="hidden object-cover w-full h-full dark:block"
+              src={ImageDark}
+              alt="Office"
+            />
+          </div>
+
+          <main className="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
+            <div className="w-full">
+              <h1 className="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">Login</h1>
+
+              <form onSubmit={handleSubmit}>
+                <Label>
+                  <span>Email</span>
+                  <Input
+                    className="mt-1"
+                    type="email"
+                    placeholder="john@doe.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    autoComplete="username"
+                  />
+                </Label>
+
+                <Label className="mt-4">
+                  <span>Password</span>
+                  <Input
+                    className="mt-1"
+                    type="password"
+                    placeholder="***************"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    autoComplete="current-password"
+                  />
+                </Label>
+
+                {error ? (
+                  <p className="mt-3 text-sm text-red-600">{error}</p>
+                ) : null}
+
+                <Button className="mt-4" block type="submit" disabled={submitting}>
+                  {submitting ? 'Logging in…' : 'Log in'}
+                </Button>
+              </form>
+
+              <hr className="my-8" />
+
+              <Button block layout="outline" disabled>
+                <GithubIcon className="w-4 h-4 mr-2" aria-hidden="true" />
+                Github
+              </Button>
+              <Button className="mt-4" block layout="outline" disabled>
+                <TwitterIcon className="w-4 h-4 mr-2" aria-hidden="true" />
+                Twitter
+              </Button>
+
+              <p className="mt-4">
+                <Link
+                  className="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
+                  to="/forgot-password"
+                >
+                  Forgot your password?
+                </Link>
+              </p>
+              <p className="mt-1">
+                <Link
+                  className="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
+                  to="/create-account"
+                >
+                  Create account
+                </Link>
+              </p>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Login;

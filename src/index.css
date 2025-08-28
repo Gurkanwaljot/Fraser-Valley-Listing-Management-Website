@@ -1,0 +1,592 @@
+/* Custom Updates for Edit Agent Modal */
+.modal-body {
+    max-height: calc(100vh - 210px);
+    overflow-y: auto;
+}
+/* Listing Table Custom CSS */
+.row-actions{
+  right: 4rem;
+}
+.more-actions{
+  display: inline-flex;              /* inline-flex */
+  width: 2.5rem;                     /* w-10 */
+  height: 2.5rem;                    /* h-10 */
+  align-items: center;               /* items-center */
+  justify-content: center;           /* justify-center */
+
+  border-radius: 9999px;             /* rounded-full */
+  border: 1px solid #e5e7eb;         /* border + border-gray-200 */
+  background-color: #ffffff;         /* bg-white */
+  color: #374151;                    /* text-gray-700 */
+
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color .15s ease, color .15s ease,
+              box-shadow .15s ease, border-color .15s ease;
+}
+
+.more-actions:hover{
+  background-color: #f9fafb;         /* hover:bg-gray-50 */
+  color: #111827;                    /* hover:text-gray-900 */  
+}
+
+/* focus:outline-none + ring-2 ring-purple-500 */
+.more-actions:focus {
+  outline: none;                     /* focus:outline-none */
+  box-shadow: 0 0 0 2px #a855f7;     /* focus:ring-2 focus:ring-purple-500 */
+}
+
+/* ---- Dark mode (Tailwind-style .dark class on <html> or <body>) ---- */
+.dark .more-actions {
+  border-color: #374151;             /* dark:border-gray-700 */
+  background-color: #1f2937;         /* dark:bg-gray-800 */
+  color: #e5e7eb;                    /* dark:text-gray-200 */
+}
+
+.dark .more-actions:hover {
+  background-color: #374151;         /* dark:hover:bg-gray-700 */
+}
+
+/* Optional: if you rely on prefers-color-scheme instead of .dark class */
+@media (prefers-color-scheme: dark) {
+  .theme-auto .more-actions {
+    border-color: #374151;
+    background-color: #1f2937;
+    color: #e5e7eb;
+  }
+  .theme-auto .more-actions:hover {
+    background-color: #374151;
+  }
+}
+
+.row-actions-div{
+    position: absolute;         /* absolute */
+  right: 0;                   /* right-0 */
+  z-index: 50;                /* z-50 */
+  margin-top: 0.5rem;         /* mt-2 */
+  width: 11rem;               /* w-44 (44 * 0.25rem) */
+  overflow: hidden;           /* overflow-hidden */
+
+  border-radius: 0.75rem;     /* rounded-xl */
+  border: 1px solid #e5e7eb;  /* border-gray-200 */
+  background-color: #ffffff;  /* bg-white */
+
+  /* ring-1 ring-black/5 + shadow-lg */
+  /* ring: a 1px outline; shadow-lg: Tailwind's large shadow */
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.05),           /* ring-1 ring-black/5 */
+    0 10px 15px -3px rgba(0, 0, 0, 0.10),    /* shadow-lg layer 1 */
+    0 4px 6px -4px rgba(0, 0, 0, 0.10);      /* shadow-lg layer 2 */
+}
+
+/* Dark mode (when you toggle a .dark class on <html> or <body>) */
+.dark .row-actions-div {
+  border-color: #374151;       /* dark:border-gray-700 */
+  background-color: #1f2937;   /* dark:bg-gray-800 */
+}
+
+
+/* Selected Agents Panel Custom CSS */
+.selected-agent-margin-top{
+  margin-top: 15rem;
+}
+/* Place AFTER Tailwind so it wins on order */
+:root {
+  /* Light theme */
+  --sa-text-base:  #6b7280; /* gray-500 (light by default) */
+  --sa-text-hover: #111827; /* gray-900 (darker on hover) */
+}
+
+/* Dark mode overrides (Tailwind's .dark on <html> or <body>) */
+html.dark, .dark {
+  --sa-text-base:  #9ca3af; /* gray-400 (light on dark bg) */
+  --sa-text-hover: #f3f4f6; /* gray-100 (brighter/higher contrast on hover) */
+}
+
+.selected-agent-text-color {
+  color: var(--sa-text-base);
+  transition: color .15s ease;
+}
+
+/* Hover/keyboard focus raises contrast */
+.selected-agent-text-color:hover,
+.selected-agent-text-color:focus-visible {
+  color: var(--sa-text-hover);
+}
+/* Custom Updates for Non Image and Image Thumbnail in create listing file */
+#nonImageThumbnail{
+    width: 10rem;
+}
+#agent-photo{
+    height: 16rem;
+    width: 17rem
+}
+.file-title{
+  padding-bottom: 10px;
+  font-size: 1.3rem;
+}
+.image-select{
+  margin-bottom: 20px;
+}
+
+.aspect-16-9 {
+  position: relative;
+  width: 100%;
+  padding-top: 50%; /* 9/16 = 0.5625 */
+}
+
+.aspect-16-9 > * {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.rounded-50{
+    border-radius: 50%;
+}
+
+/* Listing Carousel Custom CSS */
+
+/* Shared arrow button styles */
+.carousel-lightbox-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: grid;
+  place-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  z-index: 20;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+/* Hover / focus states */
+.carousel-lightbox-arrow:hover,
+.carousel-lightbox-arrow:focus {
+  background-color: rgba(0, 0, 0, 0.7);
+  transform: translateY(-50%) scale(1.1);
+  outline: none;
+}
+
+/* Left arrow placement */
+.carousel-lightbox-arrow.prev {
+  left: 16px;
+}
+
+/* Right arrow placement */
+.carousel-lightbox-arrow.next {
+  right: 16px;
+}
+
+/* Optional: tweak the icon size */
+.carousel-lightbox-arrow i {
+  font-size: 16px;
+  pointer-events: none;
+}
+
+
+/* Listing Gallery Custom CSS */
+
+.lightbox-btn {
+  position: absolute;
+  display: grid;
+  place-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1;
+  user-select: none;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  z-index: 20;
+}
+
+/* Hover and focus states */
+.lightbox-btn:hover,
+.lightbox-btn:focus {
+  background-color: rgba(0, 0, 0, 0.8);
+  outline: none;
+  transform: scale(1.05);
+}
+
+/* Left chevron */
+.lightbox-btn.prev {
+  left: 12px;            /* adjust spacing */
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Right chevron */
+.lightbox-btn.next {
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Close button */
+.lightbox-btn.close {
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  font-size: 18px;
+  border-radius: 4px;
+}
+
+/* Shared styles for both image and video */
+.lightbox-media {
+  display: block;
+  height: 100vh;       /* fits viewport height */
+  max-width: 100%;        /* responsive width */
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 0;       /* no rounding */
+  object-fit: contain;    /* ensures aspect ratio is preserved */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6); /* subtle depth */
+  transition: transform 0.3s ease;
+}
+
+/* Hover effect (optional for images) */
+.lightbox-media:hover {
+  transform: scale(1.02);
+}
+
+/* Image-specific tweaks */
+.lightbox-img {
+  user-select: none;
+  -webkit-user-drag: none; /* prevents drag ghosting */
+}
+
+/* Video-specific tweaks */
+.lightbox-video {
+  background-color: #000;   /* prevents white flash before load */
+  outline: none;
+  border: none;
+}
+
+/* Toolbar css in preview */
+.float-right{
+  float: right;
+}
+/* ============ Toolbar (subtle, professional) ============ */
+:root {
+  --tb-radius: 9999px;
+  --tb-accent: #6366f1;           /* indigo-500 (brand accent, tweak freely) */
+  --tb-text: #111827;             /* gray-900 */
+  --tb-muted: #6b7280;            /* gray-500 */
+  --tb-bg: rgba(255, 255, 255, 0.72);
+  --tb-border: #e5e7eb;           /* gray-200 */
+  --tb-pill-bg: rgba(255, 255, 255, 0.5);
+  --tb-pill-border: #e5e7eb;
+  --tb-shadow: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  --tb-shadow-hover: 0 2px 6px rgba(0,0,0,.08);
+  --tb-focus: 0 0 0 3px rgba(99,102,241,.25); /* indigo focus ring */
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --tb-text: #e5e7eb;           /* gray-200 */
+    --tb-muted: #9ca3af;          /* gray-400 */
+    --tb-bg: rgba(17, 24, 39, 0.66);   /* gray-900 */
+    --tb-border: #374151;         /* gray-700 */
+    --tb-pill-bg: rgba(31, 41, 55, 0.6); /* gray-800 */
+    --tb-pill-border: #4b5563;    /* gray-600 */
+  }
+}
+
+/* If you also toggle .dark on <html> or a parent, keep these helpers */
+.dark .toolbar .toolbar-inner { background: var(--tb-bg); }
+.dark .toolbar .toolbar-link  { color: var(--tb-text); }
+
+.toolbar {
+  width: 100%;
+  position: relative;
+}
+
+.toolbar-shell {
+  position: relative;
+  border-radius: var(--tb-radius);
+  padding: 0;                           /* remove gradient border padding */
+  background: transparent;              /* no gradient frame */
+  box-shadow: none;                     /* no colored glow */
+  float: right;
+}
+
+.toolbar-inner {
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow: var(--tb-shadow);
+}
+
+.toolbar-list {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.toolbar-list::-webkit-scrollbar { display: none; }
+
+.toolbar-item { flex: 0 0 auto; }
+
+.toolbar-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 9999px;
+  font: 500 0.95rem system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  color: var(--tb-text);
+  text-decoration: none;
+  background: var(--tb-pill-bg);
+  border: 1px solid var(--tb-pill-border);
+  transition: background .15s ease, border-color .15s ease, box-shadow .15s ease, transform .06s ease;
+}
+
+.toolbar-link svg {
+  width: 1rem; height: 1rem;
+  color: var(--tb-muted);
+  transition: color .15s ease;
+}
+
+.toolbar-link:hover {
+  background: rgba(0,0,0,0.03);
+  border-color: #d1d5db; /* gray-300 */
+  box-shadow: var(--tb-shadow-hover);
+  transform: translateY(-1px);
+}
+
+@media (prefers-color-scheme: dark) {
+  .toolbar-link:hover {
+    background: rgba(255,255,255,0.04);
+    border-color: #4b5563; /* gray-600 */
+  }
+}
+
+.toolbar-link:focus-visible {
+  outline: none;
+  box-shadow: var(--tb-focus);
+}
+
+/* Active/current tab */
+.toolbar-link.is-active,
+.toolbar-link[aria-current="true"] {
+  background: rgba(99,102,241,0.10);         /* soft indigo wash */
+  border-color: var(--tb-accent);
+  box-shadow: inset 0 0 0 1px var(--tb-accent);
+}
+.toolbar-link.is-active svg,
+.toolbar-link[aria-current="true"] svg {
+  color: var(--tb-accent);
+}
+
+/* Optional: very subtle edge fades, muted */
+.toolbar-fade {
+  pointer-events: none;
+  position: absolute; top: 0; bottom: 0;
+  width: 28px;
+}
+.toolbar-fade--left  { left: 0;  background: linear-gradient(to right, var(--tb-bg), transparent); }
+.toolbar-fade--right { right: 0; background: linear-gradient(to left,  var(--tb-bg), transparent); }
+
+/* Compact screens */
+@media (max-width: 420px) {
+  .toolbar-link { padding: 8px 12px; font-size: 0.9rem; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .toolbar-link { transition: none; }
+}
+
+/* ====== MOBILE ONLY ADDITIONS (match existing toolbar style) ====== */
+.toolbar-mobile { display: none; position: relative; }
+
+/* Hamburger (three dashes) */
+.toolbar-burger{
+  display:inline-flex; flex-direction:column; justify-content:center; gap:5px;
+  width: 42px; height: 42px;
+  border-radius: 10px;
+  background: var(--tb-pill-bg);
+  color: var(--tb-text);
+  border: 1px solid var(--tb-pill-border);
+  box-shadow: var(--tb-shadow);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background .15s ease, border-color .15s ease, box-shadow .15s ease, transform .06s ease;
+}
+.toolbar-burger:hover{
+  background: rgba(0,0,0,0.03);
+  border-color: #d1d5db;
+  box-shadow: var(--tb-shadow-hover);
+  transform: translateY(-1px);
+}
+.toolbar-burger:focus-visible{
+  outline: none;
+  box-shadow: var(--tb-focus);
+}
+.toolbar-burger .tb-line{
+  width: 18px; height: 2px; border-radius: 9999px;
+  background: currentColor; margin: 0 auto;
+}
+
+/* Dark scheme tweaks (reuse your token palette) */
+@media (prefers-color-scheme: dark){
+  .toolbar-burger:hover{
+    background: rgba(255,255,255,0.04);
+    border-color: #4b5563;
+  }
+}
+
+/* Dimmed page overlay when menu is open */
+.toolbar-overlay{
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.28);
+  z-index: 30;
+}
+
+/* Popover sheet that holds the links (vertical flex) */
+.toolbar-popover{
+  position: fixed;
+  left: 12px; 
+  right: 12px;
+  z-index: 40;
+  max-height: calc(100vh - 24px);
+  overflow: hidden;
+  background: var(--tb-bg);
+  border: 1px solid var(--tb-pill-border);
+  border-radius: 14px;
+  box-shadow: var(--tb-shadow);
+  transform: translateY(-8px);
+  opacity: 0; pointer-events: none;
+  transition: transform .18s ease, opacity .18s ease;
+}
+.toolbar-popover.is-open{
+  transform: translateY(0);
+  opacity: 1; pointer-events: auto;
+}
+
+.toolbar-menu{
+  display: flex; flex-direction: column;
+  padding: 8px;
+}
+.toolbar-menu-item{ width: 100%; }
+.toolbar-menu-link{
+  display: flex; align-items: center; width: 100%;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font: 500 0.95rem system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  color: var(--tb-text);
+  text-decoration: none;
+  transition: background .15s ease, color .15s ease;
+}
+.toolbar-menu-link:hover,
+.toolbar-menu-link:focus{
+  background: rgba(0,0,0,0.03);
+  outline: none;
+}
+
+@media (prefers-color-scheme: dark){
+  .toolbar-popover{ background: var(--tb-bg); }
+  .toolbar-menu-link:hover,
+  .toolbar-menu-link:focus{ background: rgba(255,255,255,0.04); }
+}
+
+/* Breakpoints: show hamburger, hide desktop pills on small screens */
+@media (max-width: 640px){
+  .toolbar-mobile{ display: block; }
+  .toolbar-shell{ display: none; } /* your existing pill row hidden on mobile */
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .toolbar-burger, .toolbar-popover, .toolbar-menu-link{ transition: none; }
+}
+
+
+/* Custom CSS for Listing Price and Title */
+/* ===== Hero overlay text ===== */
+:root{
+  --hero-text-color: #fff;
+  --hero-shadow-1: 0 2px 14px rgba(0,0,0,.45);
+  --hero-shadow-2: 0 1px 2px rgba(0,0,0,.60);
+}
+
+/* Big, bold address */
+.hero-title{
+  color: var(--hero-text-color);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  text-align: center;
+  text-shadow: 0px 4px 4px rgba(0,0,0,.3);
+  /* Responsive size: ~28px → ~56px */
+  font-size: clamp(1.75rem, 3.5vw + .25rem, 3.5rem);
+  max-width: min(92vw, 1100px);
+  margin-inline: auto;
+  padding-inline: .75rem;
+  /* Prevent ugly wraps on long addresses */
+  overflow-wrap: anywhere;
+}
+
+/* Price below title */
+.hero-price{
+  color: rgba(255,255,255,.92);
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  text-shadow: 0px 4px 4px rgba(0,0,0,.3);
+  /* Responsive size: ~18px → ~28px */
+  font-size: clamp(1.125rem, 1.2vw + .75rem, 1.75rem);
+  margin-top: .65rem;
+}
+
+/* Optional: subtle entrance */
+@media (prefers-reduced-motion: no-preference){
+  .hero-title, .hero-price{
+    animation: heroFadeUp .5s ease-out both;
+  }
+  .hero-price{ animation-delay: .06s; }
+}
+@keyframes heroFadeUp{
+  from{ opacity: 0; transform: translateY(6px); }
+  to{ opacity: 1; transform: translateY(0); }
+}
+
+/* Dark mode tweak if you use a .dark parent (keeps same colors) */
+.dark .hero-title,
+.dark .hero-price{
+  color: var(--hero-text-color);
+}
+
+/* Custom CSS for Disabling Right click on Preview page */
+/* Disable drag ghost + selection on media in the preview page */
+.preview--no-context img,
+.preview--no-context video {
+  -webkit-user-drag: none;  /* Safari/Chrome */
+  user-select: none;        /* optional: prevent text selection while dragging */
+}
+
+/* Optional: disable long-press callout on iOS */
+.preview--no-context {
+  -webkit-touch-callout: none;
+}
+

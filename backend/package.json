@@ -1,0 +1,31 @@
+{
+  "name": "fvrep",
+  "version": "1.0.0",
+  "description": "Express.js API for Fraser Valley listings",
+  "main": "server.mjs",
+  "type": "module",
+  "scripts": {
+    "start": "node --max-http-header-size=16384 server.mjs",
+    "dev": "nodemon --legacy-watch server.mjs"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^5.1.0",
+    "fs": "^0.0.1-security",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.17.0",
+    "multer": "^2.0.2",
+    "nanoid": "^5.1.5",
+    "nodemailer": "^7.0.5",
+    "twilio": "^5.8.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
